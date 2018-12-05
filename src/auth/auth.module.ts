@@ -1,24 +1,15 @@
 import { Module } from '@nestjs/common';
-import { JwtModule } from '@nestjs/jwt';
-import { PassportModule } from '@nestjs/passport';
+import { DatabaseModule } from 'database/database.module';
+import { UsersModule } from 'users/users.module';
 
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
-import { AuthService } from './services/auth.service';
-
-// Both expiration time and secretKey are hardcoded (in a real-world
-// application you should rather consider using environment variables).
-// TODO replace secretKey and expiresIn with env
 
 @Module({
-  imports: [
-    PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      secretOrPrivateKey: 'secretKey',
-      signOptions: {
-        expiresIn: 3600
-      }
-    })
-  ],
-  providers: [AuthService, JwtStrategy]
+  imports: [DatabaseModule, UsersModule],
+  providers: [AuthService, JwtStrategy],
+  controllers: [AuthController],
+  exports: [AuthService]
 })
 export class AuthModule {}
