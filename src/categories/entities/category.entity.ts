@@ -1,4 +1,4 @@
-import { AutoIncrement, Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
 @Table
 export class Category extends Model<Category> {
@@ -6,8 +6,11 @@ export class Category extends Model<Category> {
   @AutoIncrement
   @Column
   id: number;
+
+  @AllowNull(false)
   @Column
   name: string;
+
   @Column
   description: string;
 }

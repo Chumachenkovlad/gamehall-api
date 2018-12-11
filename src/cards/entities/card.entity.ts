@@ -1,6 +1,8 @@
+import { Injectable } from '@nestjs/common';
 import { Category } from 'categories/entities/category.entity';
-import { AutoIncrement, BelongsTo, Column, Default, Length, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import { AutoIncrement, BelongsTo, Column, Length, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
 
+@Injectable()
 @Table
 export class Card extends Model<Card> {
   @PrimaryKey
@@ -8,26 +10,21 @@ export class Card extends Model<Card> {
   @Column
   id: number;
 
-  @Column
-  @Default([])
-  tags: string[];
+  // @Column({ type: DataType.ARRAY(DataType.STRING) })
+  // tags: string[];
 
   @Unique
   @Length({ min: 5, max: 50 })
   @Column
   name: string;
 
-  @Default('')
   @Column
   hint: string;
 
   // TODO add Image
-  @Default(null)
   @Column
-  image: any;
+  image: string;
 
-  @BelongsTo(() => Category)
-  @Default(null)
-  @Column
+  @BelongsTo(() => Category, 'categoryId')
   category: Category;
 }

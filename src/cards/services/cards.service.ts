@@ -2,7 +2,6 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CardsRepository } from 'cards/constants';
 import { CardDto } from 'cards/dto/card.dto';
 import { Card } from 'cards/entities/card.entity';
-import { ConfigService } from 'config/config.service';
 import { Sequelize } from 'sequelize-typescript';
 
 type CardAttrs = keyof Card;
@@ -12,8 +11,7 @@ const CARD_ATTRS: CardAttrs[] = ['id', 'name', 'hint', 'image', 'category'];
 export class CardsService {
   constructor(
     @Inject(CardsRepository) private readonly cardsRepository: typeof Card,
-    @Inject('Sequelize') private readonly sequelize: Sequelize,
-    private readonly configService: ConfigService
+    @Inject('Sequelize') private readonly sequelize: Sequelize
   ) {}
 
   async create(cardDto: Readonly<CardDto>) {
@@ -50,6 +48,7 @@ export class CardsService {
 
   // TODO add query
   async findAll() {
+    this.cardsRepository.findAndCountAll;
     return this.cardsRepository.findAndCountAll({
       attributes: CARD_ATTRS,
       raw: true
