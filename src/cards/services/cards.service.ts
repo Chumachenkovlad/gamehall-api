@@ -5,7 +5,7 @@ import { Card } from 'cards/entities/card.entity';
 import { Sequelize } from 'sequelize-typescript';
 
 type CardAttrs = keyof Card;
-const CARD_ATTRS: CardAttrs[] = ['id', 'name', 'hint', 'image', 'category'];
+const CARD_ATTRS: CardAttrs[] = ['id', 'name', 'hint', 'image'];
 
 @Injectable()
 export class CardsService {
@@ -50,8 +50,7 @@ export class CardsService {
   async findAll() {
     this.cardsRepository.findAndCountAll;
     return this.cardsRepository.findAndCountAll({
-      attributes: CARD_ATTRS,
-      raw: true
+      attributes: CARD_ATTRS
     });
   }
 }

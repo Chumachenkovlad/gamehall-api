@@ -1,7 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { Category } from 'categories/entities/category.entity';
-import { AutoIncrement, BelongsTo, Column, Length, Model, PrimaryKey, Table, Unique } from 'sequelize-typescript';
+import {
+  AutoIncrement,
+  BelongsTo,
+  Column,
+  DefaultScope,
+  Length,
+  Model,
+  PrimaryKey,
+  Table,
+  Unique,
+} from 'sequelize-typescript';
 
+@DefaultScope({
+  include: [() => Category]
+})
 @Injectable()
 @Table
 export class Card extends Model<Card> {
