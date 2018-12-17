@@ -1,26 +1,35 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, UseInterceptors } from '@nestjs/common';
 import { CardDto } from 'cards/dto/card.dto';
 import { Card } from 'cards/entities/card.entity';
 import { CardsService } from 'cards/services/cards.service';
 import { BaseResponse } from 'common';
+import { ErrorsInterceptor } from 'common/interceptors/errors.interceptor';
 
 @Controller('cards')
 export class CardsController {
   constructor(private readonly cardsService: CardsService) {}
 
-  @Get() async getAll(): Promise<BaseResponse<Partial<Card>>> {
+  @UseInterceptors(ErrorsInterceptor)
+  @Get()
+  async getAll(): Promise<BaseResponse<Partial<Card>>> {
     return this.cardsService.findAll();
   }
 
-  @Get(':id') async getOne(@Param() id: number): Promise<Card> {
+  @UseInterceptors(ErrorsInterceptor)
+  @Get(':id')
+  async getOne(@Param() id: number): Promise<Card> {
     return this.cardsService.findById(id);
   }
 
-  @Post() async create(@Body() cardDto: CardDto): Promise<Card> {
+  @UseInterceptors(ErrorsInterceptor)
+  @Post()
+  async create(@Body() cardDto: CardDto): Promise<Card> {
     return this.cardsService.create(cardDto);
   }
 
-  @Patch() async update(@Body() cardDto: CardDto): Promise<Card> {
+  @UseInterceptors(ErrorsInterceptor)
+  @Patch()
+  async update(@Body() cardDto: CardDto): Promise<Card> {
     return this.cardsService.create(cardDto);
   }
 }

@@ -1,0 +1,5 @@
+export enum CommonErrors {
+  NOT_UNIQUE_ERR = 'NOT_UNIQUE_ERR',
+  MIN_LENGTH_ERR = 'MIN_LENGTH_ERR',
+  MAX_LENGTH_ERR = 'MAX_LENGTH_ERR'
+}
