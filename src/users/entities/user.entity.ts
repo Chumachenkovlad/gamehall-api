@@ -11,7 +11,7 @@ import {
   NotEmpty,
   PrimaryKey,
   Table,
-  Unique,
+  Unique
 } from 'sequelize-typescript';
 import { UserErrors } from 'users/constants';
 

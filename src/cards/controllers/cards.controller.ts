@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Patch, Post, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post, Query, UseInterceptors } from '@nestjs/common';
 import { CardDto } from 'cards/dto/card.dto';
 import { Card } from 'cards/entities/card.entity';
 import { CardsService } from 'cards/services/cards.service';
@@ -11,8 +11,8 @@ export class CardsController {
 
   @UseInterceptors(ErrorsInterceptor)
   @Get()
-  async getAll(): Promise<BaseResponse<Partial<Card>>> {
-    return this.cardsService.findAll();
+  async getAll(@Query() query?: any): Promise<BaseResponse<Partial<Card>>> {
+    return this.cardsService.findAll(query);
   }
 
   @UseInterceptors(ErrorsInterceptor)

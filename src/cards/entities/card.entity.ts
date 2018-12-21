@@ -1,7 +1,15 @@
 import { Injectable } from '@nestjs/common';
 import { Category } from 'categories/entities/category.entity';
 import { CommonErrors } from 'common/enums/errors';
-import { AutoIncrement, BelongsTo, Column, DefaultScope, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import {
+  AutoIncrement,
+  BelongsTo,
+  Column,
+  DefaultScope,
+  Model,
+  PrimaryKey,
+  Table
+} from 'sequelize-typescript';
 
 @DefaultScope({
   include: [() => Category]

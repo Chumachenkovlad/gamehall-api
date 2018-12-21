@@ -20,11 +20,15 @@ export class ConfigService {
     return this.envConfig[key];
   }
 
-  get jwtSecret() {
+  get jwtSecret(): string {
     return this.get(Configurations.JWT_SECRET);
   }
 
-  get tokenExpirationTime() {
+  get tokenExpirationTime(): number {
     return Number(this.get(Configurations.TOKEN_EXPIRATION_TIME));
+  }
+
+  get defaultLimit(): number {
+    return Number(this.get(Configurations.DEFAULT_LIMIT));
   }
 }

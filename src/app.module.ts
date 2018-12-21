@@ -6,7 +6,6 @@ import { UsersModule } from './users/users.module';
 import { CategoriesModule } from './categories/categories.module';
 import { CardsModule } from './cards/cards.module';
 
-
 @Module({
   imports: [AuthModule, UsersModule, DatabaseModule, ConfigModule, CategoriesModule, CardsModule]
 })

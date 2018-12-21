@@ -5,7 +5,7 @@ describe('Users Controller', () => {
   let module: TestingModule;
   beforeAll(async () => {
     module = await Test.createTestingModule({
-      controllers: [UsersController],
+      controllers: [UsersController]
     }).compile();
   });
   it('should be defined', () => {
