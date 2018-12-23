@@ -51,33 +51,21 @@ export class CardsService {
   }
 
   async findAll(query: any = {}) {
-    console.log(query);
-    // TODO refactor logic
     const where = transform(
       query.filter || {},
       (result, value, key: string) => {
         switch (key) {
+          case 'categoryId':
           case 'id': {
             return (
               value &&
               Object.assign(result, {
-                [key]: Object.assign((value as string).split(',').map(val => ({ [Op.or]: val })))
+                [key]: Object.assign({ [Op.or]: (value as string).split(',').map(Number) })
               })
             );
           }
           case 'name': {
             return Object.assign(result, { [key]: { [Op.like]: `%${value}%` } });
-          }
-          case 'category': {
-            const { id } = (value as { id: string }) || { id: null };
-            return (
-              id &&
-              Object.assign(result, {
-                [key]: {
-                  id: Object.assign((value as string).split(',').map(val => ({ [Op.or]: val })))
-                }
-              })
-            );
           }
         }
 
@@ -86,14 +74,12 @@ export class CardsService {
       {}
     );
 
-    console.log(where);
-
     this.cardsRepository.findAndCountAll;
     return this.cardsRepository.findAndCountAll({
+      where,
       attributes: CARD_ATTRS,
       limit: Number(query.limit) || this.configService.defaultLimit,
-      offset: Number(query.offset) || 0,
-      where
+      offset: Number(query.offset) || 0
     });
   }
 }
