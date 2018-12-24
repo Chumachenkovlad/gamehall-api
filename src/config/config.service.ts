@@ -31,4 +31,14 @@ export class ConfigService {
   get defaultLimit(): number {
     return Number(this.get(Configurations.DEFAULT_LIMIT));
   }
+
+  get superuserIds(): number[] {
+    return this.get(Configurations.SUPERUSER_IDS)
+      .split(',')
+      .map(Number);
+  }
+
+  get isDevelopment(): boolean {
+    return process.env.NODE_ENV === 'development';
+  }
 }

@@ -1,9 +1,7 @@
-import { BasePaginationQuery } from 'common/interfaces/queries.interface';
+import { BasePaginationQuery } from 'common';
 
-export class CardsQuery implements BasePaginationQuery {
-  offset: string;
-  limit: string;
+export class CardsQuery extends BasePaginationQuery {
   'filter[id]': string;
   'filter[name]': string;
-  'filter[category][id]': string;
+  'filter[categoryId]': string;
 }

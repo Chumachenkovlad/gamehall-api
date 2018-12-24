@@ -2,6 +2,7 @@ import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { CardsRepository } from 'cards/constants';
 import { CardDto } from 'cards/dto/card.dto';
 import { Card } from 'cards/entities/card.entity';
+import { CommonErrors } from 'common';
 import { ConfigService } from 'config/config.service';
 import { transform } from 'lodash';
 import { Op } from 'sequelize';
@@ -25,10 +26,6 @@ export class CardsService {
   async update(id: number, cardDto: Readonly<Partial<CardDto>>) {
     const card = await this.findById(id);
 
-    if (!card) {
-      throw new NotFoundException();
-    }
-
     await this.sequelize.transaction(async transaction => {
       await card.set(cardDto).save({ transaction });
     });
@@ -39,15 +36,17 @@ export class CardsService {
   async delete(id: number) {
     const card = await this.findById(id);
 
-    if (!card) {
-      throw new NotFoundException();
-    }
-
     return card.destroy();
   }
 
   async findById(id: number) {
-    return this.cardsRepository.findById(id);
+    const card = await this.cardsRepository.findByPrimary(id);
+
+    if (!card) {
+      throw new NotFoundException(CommonErrors.NOT_FOUND_ENTITY);
+    }
+
+    return card;
   }
 
   async findAll(query: any = {}) {
@@ -74,7 +73,6 @@ export class CardsService {
       {}
     );
 
-    this.cardsRepository.findAndCountAll;
     return this.cardsRepository.findAndCountAll({
       where,
       attributes: CARD_ATTRS,

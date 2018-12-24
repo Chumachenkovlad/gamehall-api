@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { ConfigService } from 'config/config.service';
+import { CommonErrors } from 'common';
 import { Sequelize } from 'sequelize-typescript';
 
 import { CategoriesRepository } from '../constants';
@@ -13,8 +13,7 @@ const Category_ATTRS: CategoryAttrs[] = ['id', 'name', 'description'];
 export class CategoriesService {
   constructor(
     @Inject(CategoriesRepository) private readonly categoryRepository: typeof Category,
-    @Inject('Sequelize') private readonly sequelize: Sequelize,
-    private readonly configService: ConfigService
+    @Inject('Sequelize') private readonly sequelize: Sequelize
   ) {}
 
   async create(categoryDto: Readonly<CategoryDto>) {
@@ -23,10 +22,6 @@ export class CategoriesService {
 
   async update(id: number, categoryDto: Readonly<Partial<CategoryDto>>) {
     const category = await this.findById(id);
-
-    if (!category) {
-      throw new NotFoundException();
-    }
 
     await this.sequelize.transaction(async transaction => {
       await category.set(categoryDto).save({ transaction });
@@ -38,14 +33,16 @@ export class CategoriesService {
   async delete(id: number) {
     const category = await this.findById(id);
 
-    if (!category) {
-      throw new NotFoundException();
-    }
-
     return category.destroy();
   }
 
   async findById(id: number) {
+    const category = await this.categoryRepository.findById(id);
+
+    if (!category) {
+      throw new NotFoundException(CommonErrors.NOT_FOUND_ENTITY);
+    }
+
     return this.categoryRepository.findById(id);
   }
 

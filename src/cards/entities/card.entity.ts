@@ -1,15 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Category } from 'categories/entities/category.entity';
 import { CommonErrors } from 'common/enums/errors';
-import {
-  AutoIncrement,
-  BelongsTo,
-  Column,
-  DefaultScope,
-  Model,
-  PrimaryKey,
-  Table
-} from 'sequelize-typescript';
+import { AutoIncrement, BelongsTo, Column, DefaultScope, Length, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
 @DefaultScope({
   include: [() => Category]
@@ -24,18 +16,12 @@ export class Card extends Model<Card> {
 
   // @Column({ type: DataType.ARRAY(DataType.STRING) })
   // tags: string[];
-
+  @Length({
+    min: 5,
+    max: 50,
+    msg: CommonErrors.LENGTH_ERR
+  })
   @Column({
-    validate: {
-      min: {
-        args: 5,
-        msg: CommonErrors.MIN_LENGTH_ERR
-      },
-      max: {
-        args: 50,
-        msg: CommonErrors.MAX_LENGTH_ERR
-      }
-    },
     unique: {
       name: 'cards_index',
       msg: CommonErrors.NOT_UNIQUE_ERR

@@ -1,4 +1,4 @@
-export interface BasePaginationQuery {
+export abstract class BasePaginationQuery {
   readonly limit: string;
   readonly offset: string;
 }
