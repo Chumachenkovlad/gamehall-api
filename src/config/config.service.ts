@@ -41,4 +41,8 @@ export class ConfigService {
   get isDevelopment(): boolean {
     return process.env.NODE_ENV === 'development';
   }
+
+  get firebaseBucketPath(): string {
+    return this.get(Configurations.FIREBASE_BUCKET_PATH);
+  }
 }
