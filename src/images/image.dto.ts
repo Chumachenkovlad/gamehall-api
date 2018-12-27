@@ -1,3 +1,4 @@
 export class ImageDto {
-  path: string;
+  id: string;
+  url: string;
 }
