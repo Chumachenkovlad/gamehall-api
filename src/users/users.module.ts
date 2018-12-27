@@ -3,7 +3,6 @@ import { DatabaseModule } from 'database/database.module';
 
 import { UsersRepository } from './constants';
 import { UsersSelfController } from './controllers/users-self/users-self.controller';
-import { UsersController } from './controllers/users/users.controller';
 import { User } from './entities/user.entity';
 import { UsersService } from './services/users.service';
 
@@ -17,6 +16,6 @@ import { UsersService } from './services/users.service';
     }
   ],
   exports: [UsersService],
-  controllers: [UsersController, UsersSelfController]
+  controllers: [UsersSelfController]
 })
 export class UsersModule {}
