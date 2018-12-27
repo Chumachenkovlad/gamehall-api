@@ -7,8 +7,9 @@ import { CategoriesModule } from './categories/categories.module';
 import { CardsModule } from './cards/cards.module';
 import { FirebaseModule } from './firebase/firebase.module';
 import { ImagesModule } from './images/images.module';
+import { FilesModule } from './files/files.module';
 
 @Module({
-  imports: [AuthModule, UsersModule, DatabaseModule, ConfigModule, CategoriesModule, CardsModule, FirebaseModule, ImagesModule]
+  imports: [AuthModule, UsersModule, DatabaseModule, ConfigModule, CategoriesModule, CardsModule, FirebaseModule, ImagesModule, FilesModule]
 })
 export class AppModule {}

@@ -1,10 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import { Category } from 'categories/entities/category.entity';
 import { CommonErrors } from 'common/enums/errors';
-import { AutoIncrement, BelongsTo, Column, DefaultScope, Length, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import { Image } from 'images/image.entity';
+import {
+  AutoIncrement,
+  BelongsTo,
+  Column,
+  DefaultScope,
+  HasOne,
+  Length,
+  Model,
+  PrimaryKey,
+  Table,
+} from 'sequelize-typescript';
 
 @DefaultScope({
-  include: [() => Category]
+  include: [
+    {
+      model: () => Category
+    },
+    {
+      model: () => Image
+    }
+  ]
 })
 @Injectable()
 @Table
@@ -33,8 +51,8 @@ export class Card extends Model<Card> {
   hint: string;
 
   // TODO add Image
-  @Column
-  image: string;
+  @HasOne(() => Image, 'imageId')
+  image: Image;
 
   @BelongsTo(() => Category, 'categoryId')
   category: Category;

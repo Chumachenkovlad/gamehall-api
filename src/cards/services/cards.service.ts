@@ -9,7 +9,7 @@ import { Op } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
 
 type CardAttrs = keyof Card;
-const CARD_ATTRS: CardAttrs[] = ['id', 'name', 'hint', 'image'];
+const CARD_ATTRS: CardAttrs[] = ['id', 'name', 'hint'];
 
 @Injectable()
 export class CardsService {

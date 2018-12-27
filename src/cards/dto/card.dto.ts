@@ -3,4 +3,5 @@ export class CardDto {
   tags: string;
   description: string;
   category: number;
+  image: string;
 }

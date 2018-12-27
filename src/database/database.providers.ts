@@ -1,5 +1,6 @@
 import { Card } from 'cards/entities/card.entity';
 import { Category } from 'categories/entities/category.entity';
+import { Image } from 'images/image.entity';
 import { Sequelize } from 'sequelize-typescript';
 import { User } from 'users/entities/user.entity';
 
@@ -15,7 +16,7 @@ export const databaseProviders = [
         password: 'password',
         database: 'duelapi'
       });
-      sequelize.addModels([User, Category, Card]);
+      sequelize.addModels([User, Category, Card, Image]);
       await sequelize.sync();
       return sequelize;
     }
