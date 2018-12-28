@@ -11,9 +11,10 @@ import {
   NotEmpty,
   PrimaryKey,
   Table,
-  Unique
+  Unique,
 } from 'sequelize-typescript';
-import { UserErrors } from 'users/constants';
+
+import { UserErrors } from '../constants';
 
 const DEFAULT_BYTE_SIZE = 16;
 const DEFAULT_ITERATIONS = 10000;

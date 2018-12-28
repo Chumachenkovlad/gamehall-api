@@ -1,12 +1,14 @@
-import { Body, Controller, Get, Param, Patch, Post, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'auth/jwt-auth.guard';
-import { BaseResponse } from 'common';
-import { SuperUserGuard } from 'common/guards/superuser.guard';
+import { Body, Controller, Get, Param, Patch, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { SuperUserGuard } from '../../common/guards/superuser.guard';
+import { ErrorsInterceptor } from '../../common/interceptors/errors.interceptor';
+import { BaseResponse } from '../../common/interfaces/base-response.interface';
 import { CategoryDto } from '../dto/category.dto';
 import { Category } from '../entities/category.entity';
 import { CategoriesService } from '../services/categories.service';
 
+@UseInterceptors(ErrorsInterceptor)
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}

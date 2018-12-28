@@ -1,6 +1,8 @@
 import { AllowNull, AutoIncrement, Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
-@Table
+@Table({
+  tableName: 'categories'
+})
 export class Category extends Model<Category> {
   @PrimaryKey
   @AutoIncrement

@@ -1,7 +1,7 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { UserDto } from 'users/dto/user.dto';
-import { UsersService } from 'users/services/users.service';
 
+import { UserDto } from '../users/dto/user.dto';
+import { UsersService } from '../users/services/users.service';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/auth.dto';
 import { AuthPayload } from './interfaces/auth-payload.interface';

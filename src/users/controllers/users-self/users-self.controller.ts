@@ -1,9 +1,11 @@
 import { Body, Controller, Get, Patch, UseGuards, UseInterceptors } from '@nestjs/common';
-import { JwtAuthGuard } from 'auth/jwt-auth.guard';
-import { ErrorsInterceptor, Self } from 'common';
-import { UserDto } from 'users/dto/user.dto';
-import { User } from 'users/entities/user.entity';
-import { UsersService } from 'users/services/users.service';
+
+import { JwtAuthGuard } from '../../../auth/jwt-auth.guard';
+import { Self } from '../../../common/decorators/self.decorator';
+import { ErrorsInterceptor } from '../../../common/interceptors/errors.interceptor';
+import { UserDto } from '../../dto/user.dto';
+import { User } from '../../entities/user.entity';
+import { UsersService } from '../../services/users.service';
 
 @UseInterceptors(ErrorsInterceptor)
 @UseGuards(JwtAuthGuard)

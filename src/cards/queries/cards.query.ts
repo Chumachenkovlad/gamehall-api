@@ -1,4 +1,4 @@
-import { BasePaginationQuery } from 'common';
+import { BasePaginationQuery } from '../../common/interfaces/queries.interface';
 
 export class CardsQuery extends BasePaginationQuery {
   'filter[id]': string;

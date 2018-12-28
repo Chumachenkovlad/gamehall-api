@@ -1,10 +1,10 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { ConfigService } from 'config/config.service';
 import * as jwt from 'jsonwebtoken';
 import * as moment from 'moment';
-import { User } from 'users/entities/user.entity';
-import { UsersService } from 'users/services/users.service';
 
+import { ConfigService } from '../config/config.service';
+import { User } from '../users/entities/user.entity';
+import { UsersService } from '../users/services/users.service';
 import { AuthPayload } from './interfaces/auth-payload.interface';
 
 @Injectable()

@@ -1,12 +1,13 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { CardsRepository } from 'cards/constants';
-import { CardDto } from 'cards/dto/card.dto';
-import { Card } from 'cards/entities/card.entity';
-import { CommonErrors } from 'common';
-import { ConfigService } from 'config/config.service';
 import { transform } from 'lodash';
 import { Op } from 'sequelize';
 import { Sequelize } from 'sequelize-typescript';
+
+import { CommonErrors } from '../../common/enums/errors';
+import { ConfigService } from '../../config/config.service';
+import { CardsRepository } from '../constants';
+import { CardDto } from '../dto/card.dto';
+import { Card } from '../entities/card.entity';
 
 type CardAttrs = keyof Card;
 const CARD_ATTRS: CardAttrs[] = ['id', 'name', 'hint'];

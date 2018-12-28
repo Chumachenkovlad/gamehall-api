@@ -1,7 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { Category } from 'categories/entities/category.entity';
-import { CommonErrors } from 'common/enums/errors';
-import { Image } from 'images/image.entity';
 import {
   AutoIncrement,
   BelongsTo,
@@ -14,6 +11,10 @@ import {
   Table,
 } from 'sequelize-typescript';
 
+import { Category } from '../../categories/entities/category.entity';
+import { CommonErrors } from '../../common';
+import { Image } from '../../images/image.entity';
+
 @DefaultScope({
   include: [
     {
@@ -25,7 +26,9 @@ import {
   ]
 })
 @Injectable()
-@Table
+@Table({
+  tableName: 'cards'
+})
 export class Card extends Model<Card> {
   @PrimaryKey
   @AutoIncrement
@@ -50,9 +53,14 @@ export class Card extends Model<Card> {
   @Column
   hint: string;
 
-  // TODO add Image
+  @Column
+  imageId: number;
+
   @HasOne(() => Image, 'imageId')
   image: Image;
+
+  @Column
+  categoryId: number;
 
   @BelongsTo(() => Category, 'categoryId')
   category: Category;

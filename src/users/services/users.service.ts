@@ -1,9 +1,10 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { BaseResponse } from 'common';
 import { Sequelize } from 'sequelize-typescript';
-import { USER_ATTRIBUTES, UserErrors, UsersRepository } from 'users/constants';
-import { UserDto } from 'users/dto/user.dto';
-import { User } from 'users/entities/user.entity';
+
+import { BaseResponse } from '../../common/interfaces/base-response.interface';
+import { USER_ATTRIBUTES, UserErrors, UsersRepository } from '../constants';
+import { UserDto } from '../dto/user.dto';
+import { User } from '../entities/user.entity';
 
 @Injectable()
 export class UsersService {

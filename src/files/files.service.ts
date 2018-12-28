@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { FirebaseService } from 'firebase/firebase.service';
 import * as path from 'path';
+
+import { FirebaseService } from '../firebase/firebase.service';
 
 @Injectable()
 export class FilesService {

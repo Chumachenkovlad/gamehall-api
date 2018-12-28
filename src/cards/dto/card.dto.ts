@@ -2,6 +2,6 @@ export class CardDto {
   name: string;
   tags: string;
   description: string;
-  category: number;
-  image: string;
+  categoryId: number;
+  imageId: string;
 }

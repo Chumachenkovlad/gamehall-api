@@ -1,7 +1,7 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { CommonErrors } from 'common';
 import { Sequelize } from 'sequelize-typescript';
 
+import { CommonErrors } from '../../common/enums/errors';
 import { CategoriesRepository } from '../constants';
 import { CategoryDto } from '../dto/Category.dto';
 import { Category } from '../entities/Category.entity';

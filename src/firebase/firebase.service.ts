@@ -1,7 +1,8 @@
 import { Bucket } from '@google-cloud/storage';
 import { Injectable } from '@nestjs/common';
-import { ConfigService } from 'config/config.service';
 import * as admin from 'firebase-admin';
+
+import { ConfigService } from '../config/config.service';
 
 const FIREBASE_CREDENTIALS_FILE_PATH = 'firebase-credentials-file.json';
 

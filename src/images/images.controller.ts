@@ -10,11 +10,12 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-import { JwtAuthGuard } from 'auth/jwt-auth.guard';
-import { ErrorsInterceptor, SuperUserGuard } from 'common';
-import { FilesService } from 'files/files.service';
 import { v4 as uuidv4 } from 'uuid';
 
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { SuperUserGuard } from '../common/guards/superuser.guard';
+import { ErrorsInterceptor } from '../common/interceptors/errors.interceptor';
+import { FilesService } from '../files/files.service';
 import { ImageDto } from './image.dto';
 import { ImagesService } from './images.service';
 

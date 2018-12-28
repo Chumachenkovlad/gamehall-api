@@ -5,7 +5,7 @@ describe('FirebaseService', () => {
   let service: FirebaseService;
   beforeAll(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [FirebaseService],
+      providers: [FirebaseService]
     }).compile();
     service = module.get<FirebaseService>(FirebaseService);
   });

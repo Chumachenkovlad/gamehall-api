@@ -1,6 +1,7 @@
 import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
-import { ConfigService } from 'config/config.service';
 import { Observable } from 'rxjs';
+
+import { ConfigService } from '../../config/config.service';
 
 @Injectable()
 export class SuperUserGuard implements CanActivate {

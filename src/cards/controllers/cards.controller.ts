@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
-import { JwtAuthGuard } from 'auth/jwt-auth.guard';
-import { BaseResponse, SuperUserGuard } from 'common';
 
+import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
+import { BaseResponse, SuperUserGuard } from '../../common';
 import { CardDto } from '../dto/card.dto';
 import { Card } from '../entities/card.entity';
 import { CardsService } from '../services/cards.service';
