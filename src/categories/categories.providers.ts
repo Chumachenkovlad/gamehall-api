@@ -1,5 +1,5 @@
 import { CategoriesRepository } from './constants';
-import { Category } from './entities/category.entity';
+import { Category } from './category.entity';
 
 export const CATEGORIES_PROVIDERS = [
   {

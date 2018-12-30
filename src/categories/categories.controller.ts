@@ -1,12 +1,12 @@
 import { Body, Controller, Get, Param, Patch, Post, UseGuards, UseInterceptors } from '@nestjs/common';
 
-import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
-import { SuperUserGuard } from '../../common/guards/superuser.guard';
-import { ErrorsInterceptor } from '../../common/interceptors/errors.interceptor';
-import { BaseResponse } from '../../common/interfaces/base-response.interface';
-import { CategoryDto } from '../dto/category.dto';
-import { Category } from '../entities/category.entity';
-import { CategoriesService } from '../services/categories.service';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { SuperUserGuard } from '../common/guards/superuser.guard';
+import { ErrorsInterceptor } from '../common/interceptors/errors.interceptor';
+import { BaseResponse } from '../common/interfaces/base-response.interface';
+import { CategoriesService } from './categories.service';
+import { CategoryDto } from './category.dto';
+import { Category } from './category.entity';
 
 @UseInterceptors(ErrorsInterceptor)
 @Controller('categories')

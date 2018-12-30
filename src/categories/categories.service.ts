@@ -1,10 +1,10 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { Sequelize } from 'sequelize-typescript';
 
-import { CommonErrors } from '../../common/enums/errors';
-import { CategoriesRepository } from '../constants';
-import { CategoryDto } from '../dto/Category.dto';
-import { Category } from '../entities/Category.entity';
+import { CommonErrors } from '../common/enums/errors';
+import { CategoryDto } from './category.dto';
+import { Category } from './category.entity';
+import { CategoriesRepository } from './constants';
 
 type CategoryAttrs = keyof Category;
 const Category_ATTRS: CategoryAttrs[] = ['id', 'name', 'description'];

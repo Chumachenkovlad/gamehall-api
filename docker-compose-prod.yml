@@ -1,0 +1,43 @@
+version: '3.1'
+
+services:
+  nodeapp:
+    build:
+      dockerfile: ./docker/node/prod/Dockerfile
+      context: .
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - 3000:3000
+    env_file: .env
+    depends_on:
+      - mariadb
+    links:
+      - mariadb
+    networks:
+      - network
+
+  mariadb:
+    image: mariadb:10.4
+    restart: always
+    env_file: .env
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    networks:
+      - network
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - network
+
+networks:
+  network:
+    driver: bridge
+
+volumes:
+  mariadb_data:
+    external: true

@@ -11,7 +11,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 
-import { Category } from '../../categories/entities/category.entity';
+import { Category } from '../../categories/category.entity';
 import { CommonErrors } from '../../common';
 import { Image } from '../../images/image.entity';
 
