@@ -5,8 +5,6 @@ services:
     build:
       dockerfile: ./docker/node/prod/Dockerfile
       context: .
-    volumes:
-      - .:/usr/src/app
     ports:
       - 3000:3000
     env_file: .env
