@@ -12,11 +12,11 @@ export const databaseProviders = [
     useFactory: async (configService: ConfigService) => {
       const sequelize = new Sequelize({
         dialect: 'mysql',
-        host: 'mariadb',
+        host: process.env.DB_HOST,
         port: 3306,
-        username: configService.get('MYSQL_USER'),
-        password: configService.get('MYSQL_ROOT_PASSWORD'),
-        database: configService.get('MYSQL_DATABASE')
+        username: process.env.MYSQL_USER,
+        password: process.env.MYSQL_PASSWORD,
+        database: process.env.MYSQL_DATABASE
       });
       sequelize.addModels([User, Category, Card, Image]);
       await sequelize.sync();
