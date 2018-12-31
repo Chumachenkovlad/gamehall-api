@@ -15,7 +15,7 @@ export const databaseProviders = [
         host: process.env.DB_HOST,
         port: 3306,
         username: process.env.MYSQL_USER,
-        password: process.env.MYSQL_PASSWORD,
+        password: process.env.MYSQL_ROOT_PASSWORD,
         database: process.env.MYSQL_DATABASE
       });
       sequelize.addModels([User, Category, Card, Image]);
