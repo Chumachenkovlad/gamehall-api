@@ -6,7 +6,7 @@ services:
       dockerfile: ./docker/node/prod/Dockerfile
       context: .
     ports:
-      - 3000:3000
+      - 80:3000
     env_file: .env
     depends_on:
       - mariadb
