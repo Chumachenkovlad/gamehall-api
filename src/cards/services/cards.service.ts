@@ -20,7 +20,7 @@ export class CardsService {
     private readonly configService: ConfigService
   ) {}
 
-  async create(cardDto: Readonly<CardDto>) {
+  async create(cardDto: Readonly<CardDto> | Readonly<CardDto>[]) {
     return this.cardsRepository.create(cardDto);
   }
 
@@ -51,6 +51,14 @@ export class CardsService {
   }
 
   async findAll(query: any = {}) {
+    return this.cardsRepository.findAndCountAll(this.createQueryOptions(query));
+  }
+
+  async countAll(query: any = {}) {
+    return this.cardsRepository.count(this.createQueryOptions(query));
+  }
+
+  private createQueryOptions(query: any) {
     const where = transform(
       query.filter || {},
       (result, value, key: string) => {
@@ -74,11 +82,11 @@ export class CardsService {
       {}
     );
 
-    return this.cardsRepository.findAndCountAll({
+    return {
       where,
       attributes: CARD_ATTRS,
       limit: Number(query.limit) || this.configService.defaultLimit,
       offset: Number(query.offset) || 0
-    });
+    };
   }
 }

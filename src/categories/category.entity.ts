@@ -1,4 +1,4 @@
-import { AllowNull, AutoIncrement, Column, Model, PrimaryKey, Table } from 'sequelize-typescript';
+import { AllowNull, AutoIncrement, Column, DataType, Model, PrimaryKey, Table } from 'sequelize-typescript';
 
 @Table({
   tableName: 'categories'
@@ -10,7 +10,9 @@ export class Category extends Model<Category> {
   id: number;
 
   @AllowNull(false)
-  @Column
+  @Column({
+    type: DataType.STRING
+  })
   name: string;
 
   @Column

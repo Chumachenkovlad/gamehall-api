@@ -12,11 +12,14 @@ export const databaseProviders = [
     useFactory: async (configService: ConfigService) => {
       const sequelize = new Sequelize({
         dialect: 'mysql',
-        host: process.env.DB_HOST,
+        host: configService.get('DB_HOST'),
         port: 3306,
-        username: process.env.MYSQL_USER,
-        password: process.env.MYSQL_ROOT_PASSWORD,
-        database: process.env.MYSQL_DATABASE
+        username: configService.get('MYSQL_USER'),
+        password: configService.get('MYSQL_ROOT_PASSWORD'),
+        database: configService.get('MYSQL_DATABASE'),
+        define: {
+          collate: 'utf8mb4_unicode_ci'
+        }
       });
       sequelize.addModels([User, Category, Card, Image]);
       await sequelize.sync();

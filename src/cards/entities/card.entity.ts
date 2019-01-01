@@ -3,6 +3,7 @@ import {
   AutoIncrement,
   BelongsTo,
   Column,
+  DataType,
   DefaultScope,
   HasOne,
   Length,
@@ -38,15 +39,12 @@ export class Card extends Model<Card> {
   // @Column({ type: DataType.ARRAY(DataType.STRING) })
   // tags: string[];
   @Length({
-    min: 5,
+    min: 2,
     max: 50,
     msg: CommonErrors.LENGTH_ERR
   })
   @Column({
-    unique: {
-      name: 'cards_index',
-      msg: CommonErrors.NOT_UNIQUE_ERR
-    }
+    type: DataType.STRING
   })
   name: string;
 
@@ -55,6 +53,11 @@ export class Card extends Model<Card> {
 
   @Column
   imageId: number;
+
+  @Column({
+    type: DataType.FLOAT
+  })
+  frequency: number;
 
   @HasOne(() => Image, 'imageId')
   image: Image;

@@ -3,3 +3,6 @@ node_modules
 *.env
 firebase-credentials-file.json
 dist
+db_data
+db
+raw_data

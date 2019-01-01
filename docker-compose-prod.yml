@@ -21,14 +21,7 @@ services:
     env_file: .env
     volumes:
       - mariadb_data:/var/lib/mysql
-    networks:
-      - network
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8080:8080
+      - ./db:/docker-entrypoint-initdb.d
     networks:
       - network
 

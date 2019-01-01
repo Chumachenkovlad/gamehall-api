@@ -1,7 +1,19 @@
-import { Body, Controller, Get, Param, Patch, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  FileInterceptor,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+  UploadedFile,
+  UseGuards,
+  UseInterceptors,
+} from '@nestjs/common';
 
 import { JwtAuthGuard } from '../../auth/jwt-auth.guard';
-import { BaseResponse, SuperUserGuard } from '../../common';
+import { BaseResponse, File, SuperUserGuard } from '../../common';
 import { CardDto } from '../dto/card.dto';
 import { Card } from '../entities/card.entity';
 import { CardsService } from '../services/cards.service';
@@ -30,5 +42,23 @@ export class CardsController {
   @Patch()
   async update(@Body() cardDto: CardDto): Promise<Card> {
     return this.cardsService.create(cardDto);
+  }
+
+  @Post('category/:categoryId/upload')
+  @UseGuards(JwtAuthGuard, SuperUserGuard)
+  @UseInterceptors(FileInterceptor('file'))
+  public async uploadImage(@UploadedFile() file: File, @Param('categoryId') categoryId: number) {
+    const cards = file.buffer
+      .toString()
+      .split('\n')
+      .map(line => line.split('  '))
+      .map(line => {
+        const [name, frequency] = line;
+        return { name, frequency: Number(frequency), categoryId: Number(categoryId) };
+      })
+      .filter(card => card.name.length > 1)
+      .map(card => this.cardsService.create(card));
+
+    return Promise.all(cards);
   }
 }
