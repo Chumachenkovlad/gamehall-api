@@ -10,7 +10,7 @@ import { CardDto } from '../dto/card.dto';
 import { Card } from '../entities/card.entity';
 
 type CardAttrs = keyof Card;
-const CARD_ATTRS: CardAttrs[] = ['id', 'name', 'hint'];
+const CARD_ATTRS: CardAttrs[] = ['id', 'name', 'frequency'];
 
 @Injectable()
 export class CardsService {
@@ -86,7 +86,8 @@ export class CardsService {
       where,
       attributes: CARD_ATTRS,
       limit: Number(query.limit) || this.configService.defaultLimit,
-      offset: Number(query.offset) || 0
+      offset: Number(query.offset) || 0,
+      order: this.sequelize.literal('rand()')
     };
   }
 }
